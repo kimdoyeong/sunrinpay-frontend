@@ -1,5 +1,5 @@
 interface PostServerInterface {
-    [key: string]: PostServerElement | any
+    [key: string]: PostServerElement | string
 }
 interface PostServerElement {
     value: any,
