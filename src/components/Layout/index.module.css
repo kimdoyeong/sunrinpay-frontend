@@ -1,0 +1,20 @@
+.wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.logo {
+    width: 100%;
+    max-height: 80px;
+}
+.nav {
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center
+}
+.header {
+    flex: 0;
+}
+.main {
+    flex: 1;
+}
