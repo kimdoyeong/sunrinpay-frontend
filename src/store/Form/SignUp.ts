@@ -41,12 +41,13 @@ function* FormSumbitSaga() {
     return;
   }
   try {
-    const data = yield call(GetServerPayload, {
+    const data = GetServerPayload({
       id: { value: id, required: true },
       password: { value: password, required: true },
       no: { value: no, required: true },
       name: { value: name, required: true }
     });
+    if (!data) return;
   } catch (e) {
     alert("오류가 발생했습니다.");
   }
