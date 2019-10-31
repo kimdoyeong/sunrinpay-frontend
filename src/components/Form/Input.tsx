@@ -1,19 +1,31 @@
+import React from 'react'
 import styled from 'styled-components';
 
 const Input = styled.input`
     font-size: 1rem;
     border: 0;
-    background: #bdbdbd;
     padding: .5em 1em;
-    border-radius: 5px;
-    box-shadow: 5px 3px 5px -1px #bdbdbd;
+    border-bottom: 1px solid gray;
     &:focus {
         outline: 0;
     }
 `;
-export const InputWrap = styled.div`
+const InputWrapLabel = styled.label`
     display: flex;
     flex-direction: column;
+    margin: 2em 0;
 `;
+
+interface InputWrapProps {
+    children: React.ReactNode
+}
+export function InputWrap({ children }: InputWrapProps) {
+    return (
+        <InputWrapLabel>
+            {children}
+        </InputWrapLabel>
+    )
+}
+
 
 export default Input;

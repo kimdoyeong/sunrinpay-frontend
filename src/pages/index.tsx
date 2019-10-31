@@ -5,7 +5,12 @@ const pages: RouteProps[] = [
     {
         path: '/',
         exact: true,
-        component: loadable(() => import('./LoginPage'))
+        component: loadable(() => import('./auth/LoginPage'))
+    },
+    {
+        path: '/signup',
+        exact: true,
+        component: loadable(() => import('./auth/SignUpPage'))
     }
 ];
 

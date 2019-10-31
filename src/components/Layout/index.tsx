@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import style from './index.module.css';
 
@@ -10,7 +11,9 @@ function Layout({ children }: LayoutProps) {
         <div className={style.wrap}>
             <header className={style.header}>
                 <nav className={style.nav}>
-                    <img src={logo} alt="Sunrinpay" className={style.logo} />
+                    <Link to="/">
+                        <img src={logo} alt="Sunrinpay" className={style.logo} />
+                    </Link>
                 </nav>
             </header>
             <main className={style.main}>
