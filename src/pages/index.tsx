@@ -11,6 +11,11 @@ const pages: RouteProps[] = [
         path: '/signup',
         exact: true,
         component: loadable(() => import('./auth/SignUpPage'))
+    },
+    {
+        path: '/dashboard',
+        exact: true,
+        component: loadable(() => import('./dashboard'))
     }
 ];
 

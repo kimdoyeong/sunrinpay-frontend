@@ -1,13 +1,16 @@
-import { combineReducers } from 'redux';
-import { all } from 'redux-saga/effects'
-import SignUp, { SignUpType } from './SignUp'
+import { combineReducers } from "redux";
+import { all } from "redux-saga/effects";
+import SignUp, { SignUpType, SignUpSaga } from "./SignUp";
+import SignIn, { SignInType, SignInSaga } from "./SignIn";
 export interface FormState {
-    SignUp: SignUpType
+  SignUp: SignUpType;
+  SignIn: SignInType;
 }
 const FormReducer = combineReducers({
-    SignUp
+  SignUp,
+  SignIn
 });
 export function* FormSaga() {
-    yield all([]);
+  yield all([SignUpSaga(), SignInSaga()]);
 }
 export default FormReducer;

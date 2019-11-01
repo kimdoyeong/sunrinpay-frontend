@@ -4,11 +4,12 @@ import ChangeHandler, {
 } from "../../lib/store/ChangeHandler";
 import GetServerPayload from "../../lib/store/GetServerPayload";
 import { RootState } from "../reducer";
+import SignUpAPI from "../../lib/api/SignUp";
 
 const FORM_CHANGE = "SignUp/FORM_CHANGE" as const;
 const FORM_SUBMIT = "SignUp/FORM_SUBMIT" as const;
 const FORM_SUBMIT_SUCCESS = "SignUp/FORM_SUBMIT_SUCCESS" as const;
-
+const FORM_SUBMIT_FAIL = "SignUp/FORM_SUBMIT_FAIL" as const;
 export const SignUpChange = ChangeHandler<{
   id?: string;
   password?: string;
@@ -26,6 +27,11 @@ function SignUpFormSubmitSuccess() {
     type: FORM_SUBMIT_SUCCESS
   };
 }
+function SignUpFormSubmitFail() {
+  return {
+    type: FORM_SUBMIT_FAIL
+  };
+}
 
 type ActionType =
   | ReturnType<typeof SignUpChange>
@@ -38,6 +44,7 @@ function* FormSumbitSaga() {
   );
   if (password !== passwordAccept) {
     alert("비밀번호가 같지 않습니다.");
+    yield put(SignUpFormSubmitFail());
     return;
   }
   try {
@@ -47,9 +54,17 @@ function* FormSumbitSaga() {
       no: { value: no, required: true },
       name: { value: name, required: true }
     });
-    if (!data) return;
+    if (!data) {
+      yield put(SignUpFormSubmitFail());
+
+      return;
+    }
+    yield call(SignUpAPI, data);
+    yield put(SignUpFormSubmitSuccess());
   } catch (e) {
+    if (process.env.NODE_ENV === "development") console.error(e);
     alert("오류가 발생했습니다.");
+    yield put(SignUpFormSubmitFail());
   }
 }
 export function* SignUpSaga() {
@@ -61,6 +76,8 @@ export interface SignUpType {
   passwordAccept: string;
   no: string;
   name: string;
+  progress?: boolean;
+  success?: boolean;
 }
 
 const initialState: SignUpType = {
@@ -68,7 +85,9 @@ const initialState: SignUpType = {
   password: "",
   passwordAccept: "",
   no: "",
-  name: ""
+  name: "",
+  progress: false,
+  success: false
 };
 
 export default function SignUp(
@@ -78,6 +97,22 @@ export default function SignUp(
   switch (action.type) {
     case FORM_CHANGE:
       return ChangeStateHandler(state, action);
+    case FORM_SUBMIT:
+      return {
+        ...state,
+        progress: true
+      };
+    case FORM_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        progress: false
+      };
+    case FORM_SUBMIT_FAIL:
+      return {
+        ...state,
+        progress: false
+      };
     default:
       return state;
   }
