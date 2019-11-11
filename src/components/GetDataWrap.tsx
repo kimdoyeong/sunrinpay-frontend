@@ -20,7 +20,7 @@ function GetDataWrap({ children }: GetDataWrapProps) {
         if (!updated || updated.getTime() > Date.now() + (1000 * 60 * 3)) { // 갱신주기 3분
             dispatch(getUserData());
         }
-    }, [logined, updated])
+    }, [logined, updated, dispatch])
 
     if (failed) {
         return null;
