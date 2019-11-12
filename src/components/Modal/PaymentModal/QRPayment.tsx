@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components';
 import MethodChangeButton from './MethodChangeButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { paymentQRRequest } from '../../../store/Payment';
+import { RootState } from '../../../store/reducer';
+import ErrorComponent from '../../Form/ErrorComponent';
+import QRCode from 'qrcode';
 
 const Wrap = styled.div`
     text-align: center;
@@ -12,7 +17,9 @@ const Wrap = styled.div`
     }
     & > .or {
         margin-top: 15px;
-        
+    }
+    & > .sub {
+        color: #7a7a7a;
     }
 `;
 
@@ -20,15 +27,42 @@ interface QRPaymentProps {
     setToCode(): any
 }
 function QRPayment({ setToCode }: QRPaymentProps) {
+    const dispatch = useDispatch();
+    const [QRImage, setQRImage] = useState<string>("");
+    const { success, error, token, modal } = useSelector((state: RootState) => ({ ...state.Payment.qr, modal: state.Modal.payment }));
+    useEffect(() => {
+        if (!modal) return;
+        dispatch(paymentQRRequest());
+    }, [dispatch, modal]);
+    useEffect(() => {
+        if (!token) return;
+        QRCode.toDataURL(token)
+            .then(val => {
+                setQRImage(val);
+            })
+            .catch(e => {
+                alert(e.message);
+            });
+
+    }, [token]);
+    if (error) {
+        return <ErrorComponent><strong>에러!</strong> {error}</ErrorComponent>
+    }
+    if (!success) {
+        return <div>로드 중...</div>
+    }
     return (
         <Wrap>
             <h1>아래 QR 코드를 스캔하세요.</h1>
             <div>
-                <img className="qr" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" alt="QR Code" />
+                <img className="qr" src={QRImage} alt="Payment QR Code" />
             </div>
             <div className="or">
                 또는, <MethodChangeButton role="button" onClick={setToCode}>코드 직접 입력하기</MethodChangeButton>
             </div>
+            <p className="sub">
+                QR 코드는 5분간만 유효합니다.
+            </p>
         </Wrap>
     )
 }
