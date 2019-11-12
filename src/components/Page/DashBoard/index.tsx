@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducer';
 import DashboardBalance from './Balance';
 import DashboardRecentPayment from './RecentPayment';
+import PaymentModal from '../../Modal/PaymentModal';
 
 const Wrap = styled.div`
     & > * {
@@ -16,10 +17,14 @@ function DashboardWelcome() {
     if (!user) return null
     const { name } = user;
     return (
-        <Wrap>
-            <DashboardBalance name={name} />
-            <DashboardRecentPayment />
-        </Wrap>
+        <>
+            <PaymentModal />
+
+            <Wrap>
+                <DashboardBalance name={name} />
+                <DashboardRecentPayment />
+            </Wrap>
+        </>
     )
 }
 export default DashboardWelcome;

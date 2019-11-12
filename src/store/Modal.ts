@@ -5,7 +5,7 @@ const TOGGLE_MODAL = "Modal/TOGGLE_MODAL" as const;
 type modalTypes = "payment";
 
 function dispather(type: any) {
-  return (modal: modalTypes[]) => {
+  return (modal: modalTypes) => {
     return {
       type,
       payload: modal
@@ -28,12 +28,10 @@ const initialState: ModalType = {
 };
 
 function modalState(
-  payload: modalTypes[],
+  payload: modalTypes,
   mapFunc = (key: modalTypes) => ({ [key]: true })
 ) {
-  return payload
-    .map(mapFunc)
-    .reduce((prev, curr) => ({ ...prev, ...curr }), {});
+  return mapFunc(payload);
 }
 export default function(state = initialState, action: ActionType): ModalType {
   switch (action.type) {

@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
-
+import { spring, Motion } from 'react-motion';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducer';
+import useModalControl from '../../lib/useModalControl';
 const Background = styled.div`
     position: fixed;
     top: 0;
@@ -13,6 +16,7 @@ const Background = styled.div`
     align-items: center;
     padding: 1.5em;
     box-sizing: border-box;
+    margin: 0;
 `;
 const Contents = styled.div`
     background: white;
@@ -21,14 +25,30 @@ const Contents = styled.div`
     padding: 1em;
 `;
 interface ModalProps {
-    children: React.ReactNode
+    children: React.ReactNode,
+    id: string
 }
 
-function Modal({ children }: ModalProps) {
+function Modal({ children, id }: ModalProps) {
+    const state = useSelector((state: RootState) => (state.Modal as any)[id]);
+    const { close } = useModalControl(id);
+    if (!state) return null;
+
     return (
-        <Background>
-            <Contents>{children}</Contents>
-        </Background>
+        <Motion defaultStyle={{ opacity: 0, scale: 1.5 }} style={{ opacity: spring(1), scale: spring(1) }}>
+            {({ opacity, scale }: any) => (
+                <Background style={{
+                    opacity,
+                    transform: `scale(${scale})`
+                }} onClick={close}>
+                    <Contents onClick={e => {
+                        e.stopPropagation();
+                    }}>
+                        {children}
+                    </Contents>
+                </Background>
+            )}
+        </Motion>
     )
 }
 

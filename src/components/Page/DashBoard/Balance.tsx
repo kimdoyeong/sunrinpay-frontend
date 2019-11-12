@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import useModalControl from '../../../lib/useModalControl';
 
 const Box = styled.div`
     padding: 1.5em;
@@ -35,11 +36,12 @@ interface DashboardBalanceProps {
     name: string
 }
 function DashboardBalance({ name }: DashboardBalanceProps) {
+    const { open } = useModalControl("payment");
     return (
         <Box>
             <h3>{name}님의 지갑</h3>
             <h1>0원</h1>
-            <Button>결제</Button>
+            <Button onClick={open}>결제</Button>
         </Box>
     );
 }

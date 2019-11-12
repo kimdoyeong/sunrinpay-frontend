@@ -1,7 +1,7 @@
 import React from 'react'
 import SEO from '../../components/SEO'
 import Container from '../../components/Layout/Container'
-import DashboardWelcome from '../../components/Page/DashBoard/Welcome'
+import DashboardWelcome from '../../components/Page/DashBoard'
 import RedirectIfNotLogined from '../../components/special/RedirectIfNotLogined'
 
 export default function () {
