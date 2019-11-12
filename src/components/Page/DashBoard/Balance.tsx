@@ -39,7 +39,7 @@ function DashboardBalance({ name }: DashboardBalanceProps) {
         <Box>
             <h3>{name}님의 지갑</h3>
             <h1>0원</h1>
-            <Button>송금</Button>
+            <Button>결제</Button>
         </Box>
     );
 }
