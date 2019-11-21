@@ -4,8 +4,9 @@ import styled from 'styled-components';
 const Input = styled.input`
     font-size: 1rem;
     border: 0;
-    padding: .5em 1em;
+    padding: .5em .1em;
     border-bottom: 1px solid gray;
+    border-radius: 0;
     &:focus {
         outline: 0;
     }

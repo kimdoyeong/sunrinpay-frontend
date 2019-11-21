@@ -23,6 +23,8 @@ const Contents = styled.div`
     width: 100%;
     max-width: 720px;
     padding: 1em;
+    max-height: 70vh;
+    overflow-y: auto;
 `;
 interface ModalProps {
     children: React.ReactNode,
