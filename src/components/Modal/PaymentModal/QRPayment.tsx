@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import MethodChangeButton from './MethodChangeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentQRRequest } from '../../../store/Payment';
 import { RootState } from '../../../store/reducer';
@@ -23,10 +22,7 @@ const Wrap = styled.div`
     }
 `;
 
-interface QRPaymentProps {
-    setToCode(): any
-}
-function QRPayment({ setToCode }: QRPaymentProps) {
+function QRPayment() {
     const dispatch = useDispatch();
     const [QRImage, setQRImage] = useState<string>("");
     const { success, error, token, modal } = useSelector((state: RootState) => ({ ...state.Payment.qr, modal: state.Modal.payment }));
@@ -36,7 +32,9 @@ function QRPayment({ setToCode }: QRPaymentProps) {
     }, [dispatch, modal]);
     useEffect(() => {
         if (!token) return;
-        QRCode.toDataURL(token)
+        QRCode.toDataURL(token, {
+            width: 500,
+        })
             .then(val => {
                 setQRImage(val);
             })
@@ -56,9 +54,6 @@ function QRPayment({ setToCode }: QRPaymentProps) {
             <h1>아래 QR 코드를 스캔하세요.</h1>
             <div>
                 <img className="qr" src={QRImage} alt="Payment QR Code" />
-            </div>
-            <div className="or">
-                또는, <MethodChangeButton role="button" onClick={setToCode}>코드 직접 입력하기</MethodChangeButton>
             </div>
             <p className="sub">
                 QR 코드는 5분간만 유효합니다.

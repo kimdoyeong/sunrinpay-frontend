@@ -14,10 +14,10 @@ export function paymentQRRequest() {
     type: PAYMENT_QR_REQUEST
   };
 }
-function paymentQRRequestSuccess(token: string) {
+function paymentQRRequestSuccess(token: string, code: string) {
   return {
     type: PAYMENT_QR_REQUEST_SUCCESS,
-    payload: token
+    payload: { token, code }
   };
 }
 function paymentQRRequestError(message: string) {
@@ -51,7 +51,7 @@ const QRRequestSaga = createRequestSaga(
       }
     );
   },
-  (data: any) => paymentQRRequestSuccess(data.data.token),
+  (data: any) => paymentQRRequestSuccess(data.data.token, data.data.code),
   paymentQRRequestError
 );
 export const PaymentSaga = createTakeEverySaga([
@@ -66,6 +66,7 @@ export interface PaymentType {
     error: null | string;
     success: boolean;
     token: string | null;
+    code: string | null;
   };
 }
 
@@ -73,7 +74,8 @@ const initialState: PaymentType = {
   qr: {
     error: null,
     success: false,
-    token: null
+    token: null,
+    code: null
   }
 };
 
@@ -82,7 +84,8 @@ export default function(state = initialState, action: ActionType): PaymentType {
     case PAYMENT_QR_REQUEST_SUCCESS:
       return produce(state, data => {
         data.qr.success = true;
-        data.qr.token = action.payload;
+        data.qr.token = action.payload.token;
+        data.qr.code = action.payload.code;
       });
     case PAYMENT_QR_REQUEST_ERROR:
       return produce(state, data => {
