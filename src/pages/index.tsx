@@ -19,7 +19,6 @@ const pages: RouteProps[] = [
     },
     {
         path: '/shop',
-        exact: true,
         component: loadable(() => import('./shop'))
     }
 ];

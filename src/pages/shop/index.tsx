@@ -4,6 +4,7 @@ import SEO from '../../components/SEO'
 import ShopHeader from '../../components/Page/Shop/ShopHeader'
 import { Route, Switch } from 'react-router-dom';
 import ShopList from '../../components/Page/Shop/ShopList';
+import ShopViewPage from './View';
 
 function Shop() {
     return (
@@ -16,6 +17,7 @@ function Shop() {
                     <Route path="/shop" exact>
                         <ShopList />
                     </Route>
+                    <Route path="/shop/:id" component={ShopViewPage} />
                 </Switch>
             </Container>
         </>
