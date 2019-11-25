@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const Button = styled.button`
+interface ButtonProps {
+    /* 버튼을 흰색 버튼으로 만듭니다. */
+    white?: boolean;
+}
+const Button = styled.button<ButtonProps>`
     all: unset;
     appearance: none;
     -webkit-appearance: none;
@@ -9,11 +13,17 @@ const Button = styled.button`
     display: block;
     width: 100%;
     box-sizing: border-box;
-    background: black;
-    color: white !important;
     border: 0;
     border-radius: 5px;
     text-align: center;
+    ${props => props.white ? css`
+        background: #EAEAEA;
+        color: black !important;
+    ` : css`
+        background: black;
+        color: white !important;
+    `}
+
 `;
 
 export default Button;
