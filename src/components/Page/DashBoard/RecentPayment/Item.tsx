@@ -16,6 +16,7 @@ const Item = styled.div`
     }
     & > .payment {
         flex: 0;
+        word-break: keep-all;
     }
 `;
 interface RecentPaymentItemProps {

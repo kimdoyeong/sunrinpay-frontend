@@ -13,6 +13,7 @@ const Button = styled.button`
     color: white !important;
     border: 0;
     border-radius: 5px;
+    text-align: center;
 `;
 
 export default Button;
