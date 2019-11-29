@@ -24,6 +24,9 @@ const pages: RouteProps[] = [
   {
     path: "/store",
     component: loadable(() => import("./store"))
+  },
+  {
+    component: loadable(() => import("../components/Page/etc/NotFound"))
   }
 ];
 
