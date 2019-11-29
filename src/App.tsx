@@ -1,7 +1,7 @@
-import React from 'react';
-import Layout from './components/Layout';
-import Pages from './pages';
-import GetDataWrap from './components/GetDataWrap';
+import React from "react";
+import Layout from "./components/Layout";
+import Pages from "./pages";
+import GetDataWrap from "./components/GetDataWrap";
 
 const App: React.FC = () => {
   return (
@@ -11,6 +11,6 @@ const App: React.FC = () => {
       </Layout>
     </GetDataWrap>
   );
-}
+};
 
 export default App;
