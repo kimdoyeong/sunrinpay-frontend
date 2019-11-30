@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import Container from "../../components/Layout/Container";
 import SEO from "../../components/SEO";
 import Input, { InputWrap } from "../../components/Form/Input";

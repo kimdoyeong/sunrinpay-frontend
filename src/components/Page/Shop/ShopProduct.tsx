@@ -46,10 +46,6 @@ interface Props {
 }
 
 class ShopProduct extends React.Component<Props> {
-  constructor(props: any) {
-    super(props);
-  }
-
   BuyProduct = async () => {
     const token = await buyProduct(
       sessionStorage.getItem("auth_token") || "token",

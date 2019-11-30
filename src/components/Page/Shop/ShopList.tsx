@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import ShopItem from "./ShopItem";
 import getOnlineStoreData from "../../../lib/api/getOnlineStoreData";
-import { Link } from "@storybook/router";
 
 const List = styled.div`
   display: flex;

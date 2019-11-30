@@ -1,12 +1,8 @@
-import React, { useState, useEffect, Component } from "react";
-import { withRouter, RouteComponentProps, Router } from "react-router-dom";
+import React, { Component } from "react";
 import ShopProduct from "../../components/Page/Shop/ShopProduct";
 import { getOnlineStoreProductData } from "../../lib/api/getOnlineStoreData";
 
 class ShopViewPage extends Component {
-  constructor(props: any) {
-    super(props);
-  }
   state = {
     name: "",
     data: { img: "", title: "", cost: 0, content: "" }
