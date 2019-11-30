@@ -34,13 +34,14 @@ const Button = styled.button`
 `;
 interface DashboardBalanceProps {
     name: string
+    credit: number;
 }
-function DashboardBalance({ name }: DashboardBalanceProps) {
+function DashboardBalance({ name, credit }: DashboardBalanceProps) {
     const { open } = useModalControl("payment");
     return (
         <Box>
             <h3>{name}님의 지갑</h3>
-            <h1>0원</h1>
+            <h1>{credit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h1>
             <Button onClick={open}>결제</Button>
         </Box>
     );
