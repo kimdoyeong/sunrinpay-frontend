@@ -6,9 +6,20 @@ import RedirectIfNotLogined from "../../components/special/RedirectIfNotLogined"
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
 import AdminDashboardTap from "../../components/Page/AdminDashBoard/Tab";
+import StoreDashboard from "../../components/Page/StoreDashboard";
 export default function() {
-  const user = useSelector((state: RootState) => state.Auth.user.user);
-
+  const { user, token } = useSelector((state: RootState) => ({
+    user: state.Auth.user.user,
+    token: state.Auth.token
+  }));
+  if (token.userType === "STORE") {
+    return (
+      <Container>
+        <SEO title="대시보드" />
+        <StoreDashboard />
+      </Container>
+    );
+  }
   if (!user || !user.permission) return null;
 
   const isAdmin = user.permission.filter((p: any) => p === "admin").length > 0;

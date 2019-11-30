@@ -13,3 +13,11 @@ export async function SignUp(data: {
     handleAPIError(e);
   }
 }
+export async function SignIn(id: string, password: string) {
+  try {
+    const req = await client.post("/store/auth", { id, password });
+    return req.data.token as string;
+  } catch (e) {
+    handleAPIError(e);
+  }
+}

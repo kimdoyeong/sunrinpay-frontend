@@ -22,9 +22,11 @@ type ActionType =
   | ReturnType<typeof toggleModal>;
 export interface ModalType {
   payment?: boolean;
+  recognize?: boolean;
 }
 const initialState: ModalType = {
-  payment: false
+  payment: false,
+  recognize: false
 };
 
 function modalState(
