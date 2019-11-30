@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../../Form/Button";
+import buyProduct from "../../../lib/api/buyProduct";
 
 const Wrap = styled.div`
   display: flex;
@@ -38,22 +39,46 @@ interface ShopProductProps {
   price: number;
   image: string;
 }
-function ShopProduct({ title, price, image }: ShopProductProps) {
-  return (
-    <Wrap>
-      <div className="image">
-        <img src={image} alt={`${title} product`} />
-      </div>
-      <div className="product">
-        <h1>{title}</h1>
-        <h3>{price}원</h3>
-        <div className="buttons">
-          <Button className="buy">구입하기</Button>
-          <Button>장바구니 추가</Button>
-        </div>
-      </div>
-    </Wrap>
-  );
+interface Props {
+  title: string;
+  price: number;
+  image: string;
 }
+
+class ShopProduct extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  BuyProduct = async () => {
+    const token = await buyProduct(
+      sessionStorage.getItem("auth_token") || "token",
+      this.props.title,
+      1
+    );
+  };
+
+  render() {
+    return (
+      <Wrap>
+        <div className="image">
+          <img src={this.props.image} alt={`${this.props.title} product`} />
+        </div>
+        <div className="product">
+          <h1>{this.props.title}</h1>
+          <h3>{this.props.price}원</h3>
+          <div className="buttons">
+            <Button className="buy" onClick={this.BuyProduct}>
+              구입하기
+            </Button>
+            <Button>장바구니 추가</Button>
+          </div>
+        </div>
+      </Wrap>
+    );
+  }
+}
+
+// function ShopProduct({ title, price, image }: ShopProductProps) {}
 
 export default ShopProduct;
