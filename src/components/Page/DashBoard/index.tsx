@@ -25,6 +25,7 @@ const Flex = styled.div`
         }
     }
 `;
+
 function DashboardWelcome() {
     const user = useSelector((state: RootState) => state.Auth.user.user);
 
@@ -44,4 +45,5 @@ function DashboardWelcome() {
         </>
     )
 }
+
 export default DashboardWelcome;

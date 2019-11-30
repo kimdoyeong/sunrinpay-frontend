@@ -21,6 +21,7 @@ const Wrap = styled.div`
         }
     }
 `;
+
 function DashboardGoStore() {
     return (
         <Wrap>

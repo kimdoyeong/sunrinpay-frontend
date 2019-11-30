@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import ShopItem from './ShopItem';
+import getOnlineStoreData from '../../../lib/api/getOnlineStoreData'
 
 const List = styled.div`
     display: flex;
@@ -12,16 +13,32 @@ const List = styled.div`
         padding: 1em 0;
     }
 `;
-function ShopList() {
-    return (
-        <List>
-            <ShopItem itemName="이호준" price={10000} image="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
-            <ShopItem itemName="이호준" price={10000} image="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
-            <ShopItem itemName="이호준" price={10000} image="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
-            <ShopItem itemName="이호준" price={10000} image="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
-            <ShopItem itemName="이호준" price={10000} image="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" />
-        </List>
-    )
+
+class Shoplist extends React.Component{
+    state = {
+        shopData : []
+    }
+    
+    async componentDidMount(){
+        const onlineStoreData = await getOnlineStoreData();
+        this.setState({
+            shopData : onlineStoreData.data
+        })
+
+        console.log(this.state.shopData)
+    }
+
+
+    render(){
+        return (
+            <List>
+                {this.state.shopData.map((data:any)=>{
+                    return <ShopItem itemName={data.title} price={data.cost} image={data.img}/>
+                })}
+            </List>
+        )
+    }
 }
 
-export default ShopList;
+
+export default Shoplist;
