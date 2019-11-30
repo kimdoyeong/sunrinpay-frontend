@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import styled from 'styled-components';
 import QrCode from 'qrcode-reader';
 
+
+const Wrap = styled.div`
+  video {
+    max-width: 100%;
+  }
+`;
 interface CameraProps {
   cb(url: string): any
 }
@@ -18,10 +25,10 @@ function Camera({ cb }: CameraProps) {
 
     if (!ctx) return;
 
-    ctx.drawImage(video.current, 0, 0);
+    ctx.drawImage(video.current, 0, 0, canvas.width, canvas.height);
     const qr = new QrCode();
-
-    qr.decode(canvas.toDataURL('image/png'));
+    const img = canvas.toDataURL('image/png');
+    qr.decode(img);
     qr.callback = function (error: any, result: any) {
       if (error) {
         console.error(error);
@@ -88,10 +95,10 @@ function Camera({ cb }: CameraProps) {
   if (cantUse) return <div>카메라를 사용할 수 없습니다.</div>;
   if (!stream) return <div>카메라를 활성화 해주세요.</div>;
   return (
-    <>
+    <Wrap>
       <video ref={video as any} playsInline />
       {qrdata === false && <div>QR을 찾을 수 없습니다.</div>}
-    </>
+    </Wrap>
   );
 }
 export default Camera;

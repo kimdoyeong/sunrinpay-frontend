@@ -11,6 +11,7 @@ function RecognizePaymentModal() {
     <Modal id="recognize">
       <h1>QR 인식</h1>
       {!url && <Camera cb={recognized} />}
+      {url && <div>결제 처리중...</div>}
     </Modal>
   );
 }
