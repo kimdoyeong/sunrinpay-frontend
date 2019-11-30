@@ -31,7 +31,7 @@ function RecognizePaymentModal() {
         setPrice('');
         setHandle(false);
       });
-  }, [handle]);
+  }, [handle, close, price, token, url]);
   function recognized(url: string) {
     setURL(url)
   }
