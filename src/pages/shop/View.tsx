@@ -10,7 +10,7 @@ function ShopViewPage({ match: { params } }: RouteComponentProps) {
     getOnlineStoreProductData(id).then(({ data }) => {
       setData({ name: id, ...data });
     });
-  }, []);
+  }, [params]);
 
   if (!data) {
     return <div>로딩 중...</div>;
