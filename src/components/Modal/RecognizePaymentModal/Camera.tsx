@@ -20,6 +20,7 @@ function Camera() {
         console.error(e);
         setCantUse(true);
       });
+
   }, []);
 
   //stream
