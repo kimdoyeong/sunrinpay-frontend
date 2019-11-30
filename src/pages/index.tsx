@@ -22,7 +22,7 @@ const pages: RouteProps[] = [
     component: loadable(() => import("./shop"))
   },
   {
-    path: "/store",
+    path: "/store/:product",
     component: loadable(() => import("./store"))
   },
   {
