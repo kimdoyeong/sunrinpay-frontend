@@ -25,6 +25,7 @@ function LoginPage() {
       history.push("/dashboard");
     }
   }, [success, history]);
+
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
