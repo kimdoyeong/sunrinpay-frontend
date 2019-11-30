@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../Form/Button";
 import buyProduct from "../../../lib/api/buyProduct";
+import QRImageModal from "../../Modal/PaymentModal/QRImageModal";
+import QRCreate from "../../Modal/PaymentModal/QRCreate";
 
 const Wrap = styled.div`
   display: flex;
@@ -46,17 +48,24 @@ interface Props {
 }
 
 class ShopProduct extends React.Component<Props> {
+  state = {
+    token: ""
+  };
   BuyProduct = async () => {
     const token = await buyProduct(
       sessionStorage.getItem("auth_token") || "token",
       this.props.title,
       1
     );
+    this.setState({
+      token
+    });
   };
 
   render() {
     return (
       <Wrap>
+        <QRImageModal token={this.state.token} />
         <div className="image">
           <img src={this.props.image} alt={`${this.props.title} product`} />
         </div>
