@@ -2,7 +2,7 @@ const OPEN_MODAL = "Modal/OPEN_MODAL" as const;
 const CLOSE_MODAL = "Modal/CLOSE_MODAL" as const;
 const TOGGLE_MODAL = "Modal/TOGGLE_MODAL" as const;
 
-type modalTypes = "payment";
+type modalTypes = "payment" | "qrcreate";
 
 function dispather(type: any) {
   return (modal: modalTypes) => {
@@ -22,9 +22,11 @@ type ActionType =
   | ReturnType<typeof toggleModal>;
 export interface ModalType {
   payment?: boolean;
+  qrcreate?: boolean;
 }
 const initialState: ModalType = {
-  payment: false
+  payment: false,
+  qrcreate: false
 };
 
 function modalState(
