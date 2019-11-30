@@ -58,7 +58,7 @@ function* SubmitSaga() {
     if (!data) throw new Error("필수 데이터가 없습니다.");
 
     const req = yield call(SignInAPI, data);
-    yield put(setToken(req.data.token));
+    yield put(setToken(req.data.token, "USER"));
     yield put(formSubmitSuccess());
   } catch (e) {
     yield put(formSubmitFail(e.response.data.message || e.message));
