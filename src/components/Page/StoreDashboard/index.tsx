@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../Form/Button";
 import useModalControl from "../../../lib/useModalControl";
 import RecognizePaymentModal from "../../Modal/RecognizePaymentModal";
-import styled from 'styled-components';
+import styled from "styled-components";
 import CodePaymentModal from "../../Modal/CodePaymentModal";
 
 const Wrap = styled.div`
@@ -11,9 +11,12 @@ const Wrap = styled.div`
   }
 `;
 
+function redirectQR() {
+  window.location.replace("/qrcode");
+}
 function StoreDashboard() {
   const qr = useModalControl("recognize");
-  const code = useModalControl('code');
+  const code = useModalControl("code");
   return (
     <Wrap>
       <RecognizePaymentModal />
@@ -21,6 +24,7 @@ function StoreDashboard() {
       <h1>대시보드</h1>
       <Button onClick={qr.open}>QR코드 인식</Button>
       <Button onClick={code.open}>코드 입력</Button>
+      <Button onClick={redirectQR}>매점상품 QR구매</Button>
     </Wrap>
   );
 }

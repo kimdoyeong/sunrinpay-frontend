@@ -18,6 +18,7 @@ async function buyProduct(token: string, productname: string, amount: Number) {
     alert(
       `거래에 실패했습니다. ERR:${res.status} - ${res.message} - 다시 시도해주세요.`
     );
+    return;
   }
   return res.data.token;
 }

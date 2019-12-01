@@ -30,6 +30,12 @@ const pages: RouteProps[] = [
     component: loadable(() => import("./store/index"))
   },
   {
+    path: "/qrcode",
+    component: loadable(() =>
+      import("../components/Page/AdminDashBoard/QRPayment")
+    )
+  },
+  {
     component: loadable(() => import("../components/Page/etc/NotFound"))
   }
 ];
