@@ -21,7 +21,8 @@ const Title = styled.p`
 export default class QRPayment extends Component {
   state = {
     tokenValue: null,
-    productsArray: [Object]
+    productsArray: [Object],
+    outputArray: [Object]
   };
   handleError = () => {
     alert("스캔 중 에러가 발생했습니다.");
@@ -33,7 +34,8 @@ export default class QRPayment extends Component {
       let dataArray = this.state.productsArray;
       dataArray.push(productData);
       this.setState({
-        productsArray: dataArray
+        productsArray: dataArray,
+        outputArray: this.state.productsArray
       });
       return;
     }
@@ -55,9 +57,14 @@ export default class QRPayment extends Component {
           onScan={this.handleScan}
           style={{ width: "50vh" }}
         />
-        {this.state.productsArray.reverse().map((data: any) => {
-          return <PaymentData title={data.productName} amount={data.amount} />;
-        })}
+        {this.state.productsArray
+          .slice(0)
+          .reverse()
+          .map((data: any) => {
+            return (
+              <PaymentData title={data.productName} amount={data.amount} />
+            );
+          })}
       </div>
     );
     const returnHome = (
