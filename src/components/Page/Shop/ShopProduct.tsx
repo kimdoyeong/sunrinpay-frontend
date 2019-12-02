@@ -65,7 +65,6 @@ class ShopProduct extends React.Component<Props> {
   render() {
     return (
       <Wrap>
-        <QRImageModal token={this.state.token} />
         <div className="image">
           <img src={this.props.image} alt={`${this.props.title} product`} />
         </div>
@@ -78,6 +77,7 @@ class ShopProduct extends React.Component<Props> {
             </Button>
             <Button>장바구니 추가</Button>
           </div>
+          {this.state.token ? <QRCreate token={this.state.token} /> : <></>}
         </div>
       </Wrap>
     );

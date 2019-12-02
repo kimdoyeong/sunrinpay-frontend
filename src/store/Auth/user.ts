@@ -52,6 +52,7 @@ export type UserType = {
     id: string;
     name: string;
     no: string;
+    credit: number;
   } | null;
   updated: Date | null;
   fail?: boolean;

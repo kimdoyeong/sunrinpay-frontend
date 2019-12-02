@@ -24,11 +24,13 @@ export interface ModalType {
   payment?: boolean;
   qrcreate?: boolean;
   recognize?: boolean;
+  code?: boolean;
 }
 const initialState: ModalType = {
   payment: false,
   qrcreate: false,
-  recognize: false
+  recognize: false,
+  code: false
 };
 
 function modalState(

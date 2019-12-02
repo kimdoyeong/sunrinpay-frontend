@@ -30,14 +30,14 @@ function DashboardWelcome() {
   const user = useSelector((state: RootState) => state.Auth.user.user);
 
   if (!user) return null;
-  const { name } = user;
+  const { name, credit } = user;
   return (
     <>
       <PaymentModal />
 
       <Wrap>
         <Flex>
-          <DashboardBalance name={name} />
+          <DashboardBalance name={name} credit={credit} />
           <DashboardGoStore />
         </Flex>
         <DashboardRecentPayment />
